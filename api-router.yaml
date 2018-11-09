@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: api-router
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: api-router
+    spec:
+      containers:
+      - name: api-router
+        image: docker.io/cilium/api-router:latest
+        imagePullPolicy: Always
+        command: ["/api-router"]
+        args:
+          - --endpoint="/google->GET:https://www.google.com/"
